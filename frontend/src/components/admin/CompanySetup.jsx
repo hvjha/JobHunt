@@ -43,34 +43,32 @@ const CompanySetup = () => {
         if (input.file) {
             formData.append("file", input.file);
         }
-        const submitHandler = async (e) => {
-            e.preventDefault();
-            try {
-                setLoading(true);
-        
-                const res = await fetch(`${COMPANY_API_END_POINT}/update/${params.id}`, {
-                    method: 'PUT',
-                    credentials: 'include', 
-                    body: formData 
-                });
-        
-                const data = await res.json();
-        
-                if (res.ok) {
-                    toast.success(data.message);
-                    navigate("/admin/companies");
-                } else {
-                    toast.error(data.message);
-                }
-            } catch (error) {
-                console.log(error);
-                toast.error('Something went wrong');
-            } finally {
-                setLoading(false);
+    
+        try {
+            setLoading(true);
+    
+            const res = await fetch(`${COMPANY_API_END_POINT}/update/${params.id}`, {
+                method: 'PUT',
+                credentials: 'include', 
+                body: formData 
+            });
+    
+            const data = await res.json();
+    
+            if (res.ok) {
+                toast.success(data.message);
+                navigate("/admin/companies");
+            } else {
+                toast.error(data.message);
             }
-        };
-        
-    }
+        } catch (error) {
+            console.log(error);
+            toast.error('Something went wrong');
+        } finally {
+            setLoading(false);
+        }
+    };
+    
 
     useEffect(() => {
         setInput({

@@ -18,7 +18,7 @@ function Navbar() {
     try {
       const response = await fetch(`${USER_API_END_POINT}/logout`, {
         method: "GET",
-        credentials: "include", // Ensures cookies are sent with the request
+        credentials: "include", 
       });
 
       const data = await response.json();
